@@ -9,6 +9,7 @@ import DashboardPage from './pages/dashboard'
 import AccountPage from './pages/account'
 import AddJobPage from './pages/addJob'
 import AllJobsPage from './pages/allJobs'
+import AuthCallback from './pages/AuthCallback'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/auth/callback" element={<AuthCallback />} />
 
       <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
       <Route path="/account" element={<ProtectedRoute><AccountPage /></ProtectedRoute>} />

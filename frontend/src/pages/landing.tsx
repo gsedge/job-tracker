@@ -12,6 +12,12 @@ export default function LandingPage() {
             <div>
                 <button onClick={() => navigate("/signup")}>Get started</button>
                 <button onClick={() => navigate("/login")}>Login</button>
+                <button
+                    onClick={() => window.location.href = 'http://localhost:5000/api/auth/google'}
+                    className="w-full px-4 py-2 bg-white text-gray-800 rounded-lg text-sm font-medium hover:bg-gray-100 transition"
+                    >
+                    Continue with Google
+                </button>
             </div>
         </div>
     )
