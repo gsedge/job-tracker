@@ -1,6 +1,8 @@
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   email VARCHAR(255) UNIQUE NOT NULL,
+  f_name VARCHAR(255),
+  l_name VARCHAR(255),
   password VARCHAR(255),
   provider VARCHAR(50) DEFAULT 'local',
   google_id VARCHAR(255),
