@@ -5,28 +5,30 @@ import authRoutes from './routes/auth'
 import pool from './db/pool' 
 import jobRoutes from './routes/jobs'
 import scrapeRoutes from './routes/scrape'
+import passport from './config/passport'
+import session from 'express-session'
 
 dotenv.config()
 
 const app = express()
-app.use(cors())
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
 app.use(express.json())
+app.use(session({
+  secret: process.env.SESSION_SECRET!,
+  resave: false,
+  saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/api/auth', authRoutes)
-
 app.use('/api/jobs', jobRoutes)
-
-
 app.use('/api/scrape', scrapeRoutes)
-
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
 pool.query('SELECT NOW()', (err, res) => {
-  if (err) {
-    console.log('Database connection failed:', err)
-  } else {
-    console.log('Database connected at:', res.rows[0].now)
-  }
+  if (err) console.log('Database connection failed:', err)
+  else console.log('Database connected at:', res.rows[0].now)
 })
