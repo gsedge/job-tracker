@@ -1,6 +1,6 @@
 
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { loginUser } from '../services/apis'
 
 export default function LoginPage() {
@@ -36,6 +36,7 @@ export default function LoginPage() {
       />
       {error && <p>{error}</p>}
       <button onClick={handleSubmit}>Login</button>
+      <Link to="/signup">Don't have an account? Sign up</Link>
     </div>
   )
 }

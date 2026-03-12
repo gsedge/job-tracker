@@ -59,14 +59,17 @@ export async function updateJob(req: any, res: Response) {
 
 export async function createJob(req: any, res: Response) {
   const { company, position_name, status, applied_date, location, salary, notes } = req.body
+  const salaryValue = salary === '' || salary === null ? null : Number(salary)
+  
   try {
     const result = await pool.query(
       `INSERT INTO jobs (user_id, company, position_name, status, applied_date, location, salary, notes)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-      [req.user.userId, company, position_name, status, applied_date, location, salary, notes]
+      [req.user.userId, company, position_name, status, applied_date, location, salaryValue, notes]
     )
     res.status(201).json(result.rows[0])
   } catch (err) {
+    console.log('createJob error:', err)
     res.status(500).json({ error: 'Failed to create job' })
   }
 }

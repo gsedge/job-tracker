@@ -1,10 +1,10 @@
 const BASE_URL = 'http://localhost:5000/api'
 
-export async function registerUser(email: string, password: string) {
+export async function registerUser(email: string, password: string, f_name: string, l_name: string) {
   const res = await fetch(`${BASE_URL}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
+    body: JSON.stringify({ email, password, f_name, l_name })
   })
   return res.json()
 }
@@ -61,6 +61,18 @@ export async function addJobApi(jobData: any) {
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     },
     body: JSON.stringify(jobData)
+  })
+  return res.json()
+}
+
+export async function scrapeJobUrl(url: string) {
+  const res = await fetch(`${BASE_URL}/scrape`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    },
+    body: JSON.stringify({ url })
   })
   return res.json()
 }
