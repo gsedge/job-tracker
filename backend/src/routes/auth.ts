@@ -1,15 +1,20 @@
 import { Router } from 'express'
-import { register, login } from '../controller/authController'
+import { register, login, updateName, updatePassword, deleteAccount, getMe } from '../controller/authController'
 import passport from '../config/passport'
 import jwt from 'jsonwebtoken'
+import { authenticate } from '../middleware/authMiddleware'
 
 const router = Router()
 
 router.post('/register', register)
 router.post('/login', login)
+router.get('/me', authenticate, getMe)
+router.put('/name', authenticate, updateName)
+router.put('/password', authenticate, updatePassword)
+router.delete('/account', authenticate, deleteAccount)
 
 // Redirects user to Google login page
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'], prompt: 'select_account' }))
 
 // Google redirects back here after login
 router.get('/google/callback',

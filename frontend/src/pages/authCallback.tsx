@@ -10,6 +10,14 @@ export default function AuthCallback() {
 
     if (token) {
       localStorage.setItem('token', token)
+      // Verify it actually saved before navigating
+      const saved = localStorage.getItem('token')
+      if (saved) {
+        navigate('/dashboard')
+      } else {
+        navigate('/login')
+      }
+    } else if (localStorage.getItem('token')) {
       navigate('/dashboard')
     } else {
       navigate('/login')
