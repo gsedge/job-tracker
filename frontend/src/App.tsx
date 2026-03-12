@@ -9,7 +9,7 @@ import DashboardPage from './pages/dashboard'
 import AccountPage from './pages/account'
 import AddJobPage from './pages/addJob'
 import AllJobsPage from './pages/allJobs'
-import AuthCallback from './pages/AuthCallback'
+import AuthCallback from "./pages/authCallback"
 
 function App() {
 
